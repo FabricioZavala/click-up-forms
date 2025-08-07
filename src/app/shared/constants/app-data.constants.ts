@@ -8,6 +8,7 @@ export const CATEGORIES: Category[] = [
     icon: 'bug',
     image: '/assets/img/categories/bugs.png',
     color: 'from-red-600 to-red-700',
+    allowedRoles: ['riesgo', 'atc', 'soporte'],
     systems: [
       {
         id: 'sorti-ec',
@@ -58,6 +59,7 @@ export const CATEGORIES: Category[] = [
     icon: 'improvements',
     image: '/assets/img/categories/mejoras.png',
     color: 'from-blue-600 to-blue-700',
+    allowedRoles: ['riesgo', 'atc', 'soporte', 'marketing'],
     systems: [
       {
         id: 'sorti-ec',
@@ -108,6 +110,7 @@ export const CATEGORIES: Category[] = [
     icon: 'marketing',
     image: '/assets/img/categories/marketing.png',
     color: 'from-pink-600 to-pink-700',
+    allowedRoles: ['marketing'],
     systems: [
       {
         id: 'sorti-ec',
@@ -158,6 +161,7 @@ export const CATEGORIES: Category[] = [
     icon: 'shield',
     image: '/assets/img/categories/riesgo.png',
     color: 'from-amber-600 to-amber-700',
+    allowedRoles: ['riesgo'],
     systems: [
       {
         id: 'sorti-ec',
@@ -208,6 +212,7 @@ export const CATEGORIES: Category[] = [
     icon: 'support',
     image: '/assets/img/categories/soporte.png',
     color: 'from-teal-600 to-teal-700',
+    allowedRoles: ['riesgo', 'atc', 'soporte', 'marketing'],
     systems: [
       {
         id: 'sorti-ec',

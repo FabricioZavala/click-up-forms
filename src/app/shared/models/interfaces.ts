@@ -5,6 +5,7 @@ export interface Category {
   icon: string;
   image?: string;
   color: string;
+  allowedRoles?: string[];
   systems: System[];
 }
 
@@ -15,4 +16,5 @@ export interface System {
   formUrl: string;
   image?: string;
   color: string;
+  allowedRoles?: string[];
 }
