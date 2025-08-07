@@ -7,14 +7,17 @@ import { Role } from '../../shared/models/role.enum';
   providedIn: 'root',
 })
 export class RoleService {
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private router: Router) {}
 
   getCurrentRole(): Observable<string | null> {
-    return this.route.queryParams.pipe(
-      map((params) => {
-        return params['role'] || null;
-      })
-    );
+
+    const urlTree = this.router.parseUrl(this.router.url);
+    const role = urlTree.queryParams['role'] || null;
+
+    return new Observable((observer) => {
+      observer.next(role);
+      observer.complete();
+    });
   }
 
   isValidRole(role: string): boolean {

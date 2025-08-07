@@ -23,8 +23,8 @@ export class SystemFilterService {
     // Filtrar sistemas que incluyan el rol del usuario en allowedRoles
     return systems.filter(system => {
       if (!system.allowedRoles || system.allowedRoles.length === 0) {
-        // Si no hay roles especificados, mostrar el sistema
-        return true;
+     
+        return false;
       }
       
       // Verificar si el rol del usuario está en la lista de roles permitidos

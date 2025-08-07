@@ -3,4 +3,5 @@ export enum Role {
   ATC = 'atc',
   SOPORTE = 'soporte',
   MARKETING = 'marketing',
+  Fabricio = 'fabricio',
 }
