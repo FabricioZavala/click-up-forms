@@ -119,3 +119,31 @@
     mask-composite: xor;
   }
 }
+
+.category-card {
+  overflow: hidden;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    transition: transform 2s cubic-bezier(0.19, 1, 0.22, 1);
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  &:hover::after {
+    opacity: 1;
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}

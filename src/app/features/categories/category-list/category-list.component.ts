@@ -8,6 +8,7 @@ import { ICONS } from '../../../shared/constants/icons.constants';
 import { Category } from '../../../shared/models/interfaces';
 import { RoleService } from '../../../core/services/role.service';
 import { CategoryFilterService } from '../../../core/services/category-filter.service';
+import { NavigationService } from '../../../core/services/navigation.service';
 
 @Component({
   selector: 'app-category-list',
@@ -27,7 +28,8 @@ export class CategoryListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private roleService: RoleService,
-    private categoryFilterService: CategoryFilterService
+    private categoryFilterService: CategoryFilterService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
@@ -58,7 +60,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   navigateToSystems(categoryId: string): void {
-    this.router.navigate(['/category', categoryId]);
+    this.navigationService.navigateToCategory(categoryId);
   }
 
   getIcon(iconName: string): string {

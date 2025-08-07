@@ -5,6 +5,9 @@ import { LoadingSpinnerComponent } from '../../../shared/components/loading-spin
 import { FormModalComponent } from '../form-modal/form-modal.component';
 import { CATEGORIES } from '../../../shared/constants/app-data.constants';
 import { Category, System } from '../../../shared/models/interfaces';
+import { RoleService } from '../../../core/services/role.service';
+import { SystemFilterService } from '../../../core/services/system-filter.service';
+import { NavigationService } from '../../../core/services/navigation.service';
 
 @Component({
   selector: 'app-system-list',
@@ -15,6 +18,7 @@ import { Category, System } from '../../../shared/models/interfaces';
 })
 export class SystemListComponent implements OnInit {
   category: Category | null = null;
+  filteredSystems: System[] = [];
   loading = false;
   showModal = false;
   selectedSystem: System | null = null;
@@ -22,7 +26,10 @@ export class SystemListComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private roleService: RoleService,
+    private systemFilterService: SystemFilterService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
@@ -35,11 +42,18 @@ export class SystemListComponent implements OnInit {
         this.router.navigate(['/']);
         return;
       }
+
+      this.roleService.getCurrentRole().subscribe(userRole => {
+        this.filteredSystems = this.systemFilterService.filterSystemsByRole(
+          this.category!.systems,
+          userRole || ''
+        );
+      });
     });
   }
 
   goBack(): void {
-    this.router.navigate(['/']);
+    this.navigationService.navigateBack();
   }
 
   openSystemForm(system: System): void {
@@ -55,7 +69,7 @@ export class SystemListComponent implements OnInit {
   onFormSubmitted(): void {
     this.closeModal();
     setTimeout(() => {
-      this.router.navigate(['/']);
+      this.navigationService.navigateBack();
     }, 1000);
   }
 

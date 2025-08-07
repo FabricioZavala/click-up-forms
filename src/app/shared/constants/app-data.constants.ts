@@ -17,6 +17,8 @@ export const CATEGORIES: Category[] = [
         formUrl: '',
         image: '/assets/img/systems/sorti-ec.png',
         color: 'from-blue-600 to-blue-700',
+        //añadir los permisos de cada rol despues que riden te de como va
+        allowedRoles: ['riesgo', 'atc', 'soporte', 'marketing'],
       },
       {
         id: 'sorticenter',
@@ -25,6 +27,7 @@ export const CATEGORIES: Category[] = [
         formUrl: '',
         image: '/assets/img/systems/sorti-center.png',
         color: 'from-orange-600 to-orange-700',
+        allowedRoles: ['riesgo', 'atc', 'soporte', 'marketing'],
       },
       {
         id: 'backoffice',
@@ -33,6 +36,7 @@ export const CATEGORIES: Category[] = [
         formUrl: '',
         image: '/assets/img/systems/backoffice.png',
         color: 'from-gray-600 to-gray-700',
+        allowedRoles: ['riesgo', 'atc', 'soporte', 'marketing'],
       },
       {
         id: 'contabilidad',
@@ -41,6 +45,7 @@ export const CATEGORIES: Category[] = [
         formUrl: '',
         image: '/assets/img/systems/contabilidad.png',
         color: 'from-emerald-600 to-emerald-700',
+        allowedRoles: ['atc', 'soporte', 'marketing'], // Oculto para riesgo
       },
       {
         id: 'growth-hacking',
@@ -49,6 +54,7 @@ export const CATEGORIES: Category[] = [
         formUrl: '',
         image: '/assets/img/systems/growth-hacking.png',
         color: 'from-violet-600 to-violet-700',
+        allowedRoles: ['atc', 'soporte', 'marketing'], // Oculto para riesgo
       },
     ],
   },
@@ -68,6 +74,7 @@ export const CATEGORIES: Category[] = [
         formUrl: '',
         image: '/assets/img/systems/sorti-ec.png',
         color: 'from-blue-600 to-blue-700',
+        allowedRoles: ['riesgo', 'atc', 'soporte', 'marketing'],
       },
       {
         id: 'sorticenter',
