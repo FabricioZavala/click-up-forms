@@ -1,0 +1,14 @@
+<div class="flex flex-col items-center justify-center p-8 space-y-4">
+  <div class="relative">
+    <div
+      [class]="
+        spinnerClasses +
+        ' animate-spin rounded-full border-4 border-gray-200 border-t-current'
+      "
+    ></div>
+  </div>
+
+  <div *ngIf="message" class="text-center">
+    <p class="text-gray-600 font-medium animate-pulse">{{ message }}</p>
+  </div>
+</div>

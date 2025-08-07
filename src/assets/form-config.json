@@ -1,0 +1,22 @@
+{
+  "roles": ["riesgo", "atc", "soporte"],
+  "categories": {
+    "bugs": {
+      "label": "Bugs",
+      "icon": "bug",
+      "roles": ["riesgo", "soporte"],
+      "systems": {
+        "Sorti": "",
+        "BackOffice": ""
+      }
+    },
+    "riesgos": {
+      "label": "Riesgos",
+      "icon": "shield-exclamation",
+      "roles": ["riesgo"],
+      "systems": {
+        "SortiCenter": ""
+      }
+    }
+  }
+}
