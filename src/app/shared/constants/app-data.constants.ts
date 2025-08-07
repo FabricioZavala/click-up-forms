@@ -16,7 +16,7 @@ const BASE_SYSTEMS: System[] = [
     description: 'Sistema de gestión',
     formUrl: '',
     image: '/assets/img/systems/sorti-center.png',
-    color: 'from-orange-600 to-orange-700',
+    color: 'from-emerald-600 to-emerald-700',
     allowedRoles: [],
   },
   {
@@ -34,7 +34,7 @@ const BASE_SYSTEMS: System[] = [
     description: 'Sistema contable',
     formUrl: '',
     image: '/assets/img/systems/contabilidad.png',
-    color: 'from-emerald-600 to-emerald-700',
+    color: 'from-orange-600 to-orange-700',
     allowedRoles: [],
   },
   {
