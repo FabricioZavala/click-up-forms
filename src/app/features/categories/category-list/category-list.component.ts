@@ -34,7 +34,10 @@ export class CategoryListComponent implements OnInit {
   }
 
   navigateToSystems(categoryId: string): void {
+    console.log('🚀 Navigating to category:', categoryId);
+    console.log('🛣️ Route will be: /category/' + categoryId);
     this.router.navigate(['/category', categoryId]);
+    console.log('✅ Navigation command sent');
   }
 
   getIcon(iconName: string): string {
