@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { System } from '../../../shared/constants/app-data.constants';
+import { System } from '../../../shared/models/interfaces';
 
 @Component({
   selector: 'app-form-modal',
@@ -61,7 +61,6 @@ export class FormModalComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   simulateFormSubmission(): void {
-    // Simular envío de formulario para demo
     this.onFormSubmitted.emit();
   }
 

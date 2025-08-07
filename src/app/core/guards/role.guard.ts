@@ -8,18 +8,13 @@ export const roleGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
 
   const role = route.queryParams['role'];
 
-  console.log('Role Guard - checking role:', role);
-
   if (!role) {
-    console.log('No role parameter found');
-    return true; // Permitir acceso para mostrar mensaje de error
+    return true;
   }
 
   if (!roleService.isValidRole(role)) {
-    console.log('Invalid role:', role);
-    return true; // Permitir acceso para mostrar mensaje de error
+    return true;
   }
 
-  console.log('Role guard passed for role:', role);
   return true;
 };

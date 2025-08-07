@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
-import {
-  CATEGORIES,
-  ICONS,
-  Category,
-} from '../../../shared/constants/app-data.constants';
+import { CATEGORIES } from '../../../shared/constants/app-data.constants';
+import { ICONS } from '../../../shared/constants/icons.constants';
+import { Category } from '../../../shared/models/interfaces';
 
 @Component({
   selector: 'app-category-list',
@@ -20,24 +18,14 @@ export class CategoryListComponent implements OnInit {
   icons = ICONS;
   loading = false;
 
-  constructor(private router: Router) {
-    console.log('CategoryListComponent constructor called');
-    console.log('CATEGORIES from import:', CATEGORIES);
-  }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // Asignar categorías en ngOnInit
     this.categories = CATEGORIES;
-    console.log('ngOnInit called');
-    console.log('Categories assigned:', this.categories);
-    console.log('Categories length:', this.categories.length);
   }
 
   navigateToSystems(categoryId: string): void {
-    console.log('🚀 Navigating to category:', categoryId);
-    console.log('🛣️ Route will be: /category/' + categoryId);
     this.router.navigate(['/category', categoryId]);
-    console.log('✅ Navigation command sent');
   }
 
   getIcon(iconName: string): string {

@@ -12,7 +12,6 @@ export class RoleService {
   getCurrentRole(): Observable<string | null> {
     return this.route.queryParams.pipe(
       map((params) => {
-        console.log('Query params:', params);
         return params['role'] || null;
       })
     );

@@ -1,11 +1,9 @@
 <div *ngIf="isOpen" class="fixed inset-0 z-50 overflow-y-auto">
-  <!-- Backdrop with blur effect -->
   <div
     class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-all duration-300"
     (click)="close()"
   ></div>
 
-  <!-- Modal Container -->
   <div class="flex min-h-full items-center justify-center p-4">
     <div
       class="relative bg-white rounded-3xl shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden transform transition-all duration-300 scale-100"
@@ -14,7 +12,6 @@
       [class.xl:w-[75%]]="true"
       (click)="$event.stopPropagation()"
     >
-      <!-- Header -->
       <div
         class="relative bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 px-6 py-4"
       >
@@ -73,9 +70,7 @@
         </div>
       </div>
 
-      <!-- Content -->
       <div class="relative h-[75vh] bg-gray-50">
-        <!-- iframe para formulario real -->
         <iframe
           *ngIf="system?.formUrl && safeFormUrl"
           [src]="safeFormUrl"
@@ -84,13 +79,11 @@
         >
         </iframe>
 
-        <!-- Placeholder para formulario no configurado -->
         <div
           *ngIf="!system?.formUrl"
           class="flex flex-col items-center justify-center h-full text-gray-500 p-8"
         >
           <div class="text-center max-w-md">
-            <!-- Icon -->
             <div
               class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center"
             >
@@ -109,7 +102,6 @@
               </svg>
             </div>
 
-            <!-- Message -->
             <h4 class="text-2xl font-semibold text-gray-800 mb-4">
               Formulario en preparación
             </h4>
@@ -119,7 +111,6 @@
               botón de demostración.
             </p>
 
-            <!-- Demo Button -->
             <button
               (click)="simulateFormSubmission()"
               class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 hover:scale-105 shadow-lg"
@@ -140,7 +131,6 @@
               Simular Envío (Demo)
             </button>
 
-            <!-- Info -->
             <p class="text-xs text-gray-400 mt-4">
               * Este botón simula el envío exitoso del formulario
             </p>
@@ -148,7 +138,6 @@
         </div>
       </div>
 
-      <!-- Footer -->
       <div class="bg-white border-t border-gray-200 px-6 py-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-2 text-sm text-gray-500">
