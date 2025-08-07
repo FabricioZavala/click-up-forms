@@ -32,6 +32,14 @@ export class CategoryListComponent implements OnInit {
     return this.icons[iconName as keyof typeof this.icons] || this.icons.folder;
   }
 
+  onImageError(event: any, category: Category): void {
+    event.target.style.display = 'none';
+    const parentDiv = event.target.parentElement;
+    parentDiv.innerHTML = `<div class="w-full h-full text-white">${this.getIcon(
+      category.icon
+    )}</div>`;
+  }
+
   trackByCategory(index: number, category: Category): string {
     return category.id;
   }
