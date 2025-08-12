@@ -24,27 +24,27 @@ export class SystemListComponent implements OnInit {
   selectedSystem: System | null = null;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef,
-    private roleService: RoleService,
-    private systemFilterService: SystemFilterService,
-    private navigationService: NavigationService
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private _cdr: ChangeDetectorRef,
+    private _roleService: RoleService,
+    private _systemFilterService: SystemFilterService,
+    private _navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this._route.params.subscribe((params) => {
       const categoryId = params['id'];
 
       this.category = CATEGORIES.find((cat) => cat.id === categoryId) || null;
 
       if (!this.category) {
-        this.router.navigate(['/']);
+        this._router.navigate(['/']);
         return;
       }
 
-      this.roleService.getCurrentRole().subscribe(userRole => {
-        this.filteredSystems = this.systemFilterService.filterSystemsByRole(
+      this._roleService.getCurrentRole().subscribe(userRole => {
+        this.filteredSystems = this._systemFilterService.filterSystemsByRole(
           this.category!.systems,
           userRole || ''
         );
@@ -53,7 +53,7 @@ export class SystemListComponent implements OnInit {
   }
 
   goBack(): void {
-    this.navigationService.navigateBack();
+    this._navigationService.navigateBack();
   }
 
   openSystemForm(system: System): void {
@@ -69,7 +69,7 @@ export class SystemListComponent implements OnInit {
   onFormSubmitted(): void {
     this.closeModal();
     setTimeout(() => {
-      this.navigationService.navigateBack();
+      this._navigationService.navigateBack();
     });
   }
 

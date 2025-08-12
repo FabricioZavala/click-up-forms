@@ -27,7 +27,7 @@ export class FormModalComponent implements OnInit, OnDestroy, OnChanges {
 
   safeFormUrl: SafeResourceUrl | null = null;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private _sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     if (typeof window !== 'undefined') {
@@ -43,7 +43,7 @@ export class FormModalComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(): void {
     if (this.system?.formUrl) {
-      this.safeFormUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      this.safeFormUrl = this._sanitizer.bypassSecurityTrustResourceUrl(
         this.system.formUrl
       );
     } else {

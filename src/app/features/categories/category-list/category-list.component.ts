@@ -25,11 +25,11 @@ export class CategoryListComponent implements OnInit {
   searchTerm = '';
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private roleService: RoleService,
-    private categoryFilterService: CategoryFilterService,
-    private navigationService: NavigationService
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private _roleService: RoleService,
+    private _categoryFilterService: CategoryFilterService,
+    private _navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
@@ -39,8 +39,8 @@ export class CategoryListComponent implements OnInit {
   loadCategories(): void {
     this.loading = true;
 
-    this.roleService.getCurrentRole().subscribe((userRole) => {
-      this.categories = this.categoryFilterService.filterCategoriesByRole(
+    this._roleService.getCurrentRole().subscribe((userRole) => {
+      this.categories = this._categoryFilterService.filterCategoriesByRole(
         CATEGORIES,
         userRole || ''
       );
@@ -60,7 +60,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   navigateToSystems(categoryId: string): void {
-    this.navigationService.navigateToCategory(categoryId);
+    this._navigationService.navigateToCategory(categoryId);
   }
 
   getIcon(iconName: string): string {
