@@ -70,7 +70,7 @@ export class SystemListComponent implements OnInit {
     this.closeModal();
     setTimeout(() => {
       this.navigationService.navigateBack();
-    }, 1000);
+    });
   }
 
   onSystemImageError(event: any, system: System): void {
