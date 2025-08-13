@@ -5,7 +5,7 @@ const BASE_SYSTEMS: System[] = [
     id: 'sorti-ec',
     name: 'Sorti.ec',
     description: 'Sistema de apuestas de Sorti',
-    formUrl: '',
+    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLScTGnFVR_5GuQTBvNawqp2y6SVw0WL6HbBjR0CNy1bz6P3sLQ/viewform?usp=dialog',
     image: '/assets/img/systems/sorti-ec.png',
     color: 'from-blue-600 to-blue-700',
     allowedRoles: [],
