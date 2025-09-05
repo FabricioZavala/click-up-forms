@@ -9,7 +9,11 @@
     "build:cloudflare": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:clickup-forms": "node dist/clickup-forms/server/server.mjs"
+    "serve:ssr:clickup-forms": "node dist/clickup-forms/server/server.mjs",
+    "docker:build": "docker build -t clickup-forms .",
+    "docker:run": "docker run -p 8080:80 clickup-forms",
+    "docker:compose:up": "docker-compose up --build",
+    "docker:compose:down": "docker-compose down"
   },
   "prettier": {
     "overrides": [
