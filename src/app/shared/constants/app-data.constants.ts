@@ -108,7 +108,7 @@ const CATEGORY_SYSTEM_ROLES: Record<string, Record<string, string[]>> = {
     'growth-hacking': ['atc', 'riesgo', 'master'],
   },
   'gestion-riesgos': {
-    'sorti-ec': ['riesgo', 'master', 'atc'],
+    'sorti-ec': ['atc', 'riesgo', 'master'],
     sorticenter: [],
     backoffice: [],
     contabilidad: [],
@@ -122,7 +122,7 @@ const CATEGORY_SYSTEM_ROLES: Record<string, Record<string, string[]>> = {
     'growth-hacking': [],
   },
   'consulta-apuestas': {
-    'sorti-ec': ['atc', 'master'],
+    'sorti-ec': ['atc', 'riesgo', 'master'],
     sorticenter: [],
     backoffice: [],
     contabilidad: [],
@@ -162,7 +162,7 @@ export const CATEGORIES: Category[] = [
   },
   {
     id: 'reportar-incidentes',
-    name: 'Reportar un Incidente',
+    name: 'Reporte de incidente',
     description: 'Reportar errores y problemas técnicos',
     icon: 'bug',
     image: '/assets/img/categories/bugs.png',
