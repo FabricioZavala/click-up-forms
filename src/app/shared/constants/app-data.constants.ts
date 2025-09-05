@@ -1,11 +1,14 @@
 import { Category, System } from '../models/interfaces';
 
+//comentarios para no olvidarme como funciona la logica de los objetos
+
+//se añaden los sistemas, no tomar en cuenta el formlUrl y allowedRoles
 const BASE_SYSTEMS: System[] = [
   {
     id: 'sorti-ec',
-    name: 'Sorti.ec',
+    name: 'Jugadores',
     description: 'Sistema de apuestas de Sorti',
-    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLScTGnFVR_5GuQTBvNawqp2y6SVw0WL6HbBjR0CNy1bz6P3sLQ/viewform?usp=dialog',
+    formUrl: '',
     image: '/assets/img/systems/sorti-ec.png',
     color: 'from-blue-600 to-blue-700',
     allowedRoles: [],
@@ -48,13 +51,54 @@ const BASE_SYSTEMS: System[] = [
   },
 ];
 
+// Url de cada sistema por categoria (Cada categoria tiene formularios distintos)
+const FORM_URLS: Record<string, Record<string, string>> = {
+  'reportar-incidentes': {
+    'sorti-ec':
+      'https://forms.clickup.com/9011644237/f/8cj5hud-24931/EGQXT0MUP6HUGLLSCL?TIPO%20SISTEMA=BET',
+    sorticenter:
+      'https://forms.clickup.com/9011644237/f/8cj5hud-24931/EGQXT0MUP6HUGLLSCL?TIPO%20SISTEMA=CENTER',
+    backoffice:
+      'https://forms.clickup.com/9011644237/f/8cj5hud-24931/EGQXT0MUP6HUGLLSCL?TIPO%20SISTEMA=BO',
+    contabilidad:
+      'https://forms.clickup.com/9011644237/f/8cj5hud-24931/EGQXT0MUP6HUGLLSCL?TIPO%20SISTEMA=CONTABILIDAD',
+    'growth-hacking':
+      'https://forms.clickup.com/9011644237/f/8cj5hud-24931/EGQXT0MUP6HUGLLSCL?TIPO%20SISTEMA=GROWTH',
+  },
+  'mejoras-requerimientos': {
+    'sorti-ec':
+      'https://forms.clickup.com/9011644237/f/8cj5hud-24971/MWQPSUJXF70OMZY3Z2?TIPO%20SISTEMA=BET',
+    sorticenter:
+      'https://forms.clickup.com/9011644237/f/8cj5hud-24971/MWQPSUJXF70OMZY3Z2?TIPO%20SISTEMA=CENTER',
+    backoffice:
+      'https://forms.clickup.com/9011644237/f/8cj5hud-24971/MWQPSUJXF70OMZY3Z2?TIPO%20SISTEMA=BO',
+    contabilidad:
+      'https://forms.clickup.com/9011644237/f/8cj5hud-24971/MWQPSUJXF70OMZY3Z2?TIPO%20SISTEMA=CONTABILIDAD',
+    'growth-hacking':
+      'https://forms.clickup.com/9011644237/f/8cj5hud-24971/MWQPSUJXF70OMZY3Z2?TIPO%20SISTEMA=GROWTH',
+  },
+  'gestion-riesgos': {
+    'sorti-ec':
+      'https://forms.clickup.com/90131692209/f/2ky48ynh-4613/J34B2F86W8E9ZNTO35',
+  },
+  'solicitud-servicios': {
+    'sorti-ec':
+      'https://forms.clickup.com/90131692209/f/2ky48ynh-5273/PZTYP6L12ZR3HL0E49',
+  },
+  'consulta-apuestas': {
+    'sorti-ec':
+      'https://forms.clickup.com/9011644237/f/8cj5hud-24951/212YWBBS2JXD4D8FQN?TIPO%20SISTEMA=BET',
+  },
+};
+
+//aqui se asignan los roles a cada sistema, cada sistema está asignado a una categoria
 const CATEGORY_SYSTEM_ROLES: Record<string, Record<string, string[]>> = {
   'mejoras-requerimientos': {
-    'sorti-ec': ['atc', 'master'],
-    sorticenter: ['atc', 'master'],
-    backoffice: ['atc', 'master'],
-    contabilidad: ['atc', 'master'],
-    'growth-hacking': ['atc', 'master'],
+    'sorti-ec': ['atc', 'riesgo', 'master'],
+    sorticenter: ['atc', 'riesgo', 'master'],
+    backoffice: ['atc', 'riesgo', 'master'],
+    contabilidad: ['atc', 'riesgo', 'master'],
+    'growth-hacking': ['atc', 'riesgo', 'master'],
   },
   'reportar-incidentes': {
     'sorti-ec': ['atc', 'riesgo', 'master'],
@@ -64,44 +108,51 @@ const CATEGORY_SYSTEM_ROLES: Record<string, Record<string, string[]>> = {
     'growth-hacking': ['atc', 'riesgo', 'master'],
   },
   'gestion-riesgos': {
-    'sorti-ec': [ 'master'],
-    sorticenter: ['riesgo', 'master'],
-    backoffice: ['riesgo', 'master'],
-    contabilidad: [ 'master'],
-    'growth-hacking': [ 'master'],
+    'sorti-ec': ['riesgo', 'master', 'atc'],
+    sorticenter: [],
+    backoffice: [],
+    contabilidad: [],
+    'growth-hacking': [],
   },
   'solicitud-servicios': {
-    'sorti-ec': ['master'],
-    sorticenter: ['riesgo', 'master'],
-    backoffice: ['riesgo', 'master'],
-    contabilidad: ['riesgo', 'master'],
-    'growth-hacking': ['riesgo', 'master'],
+    'sorti-ec': ['atc', 'riesgo', 'master'],
+    sorticenter: [],
+    backoffice: [],
+    contabilidad: [],
+    'growth-hacking': [],
   },
   'consulta-apuestas': {
     'sorti-ec': ['atc', 'master'],
-    sorticenter: ['master'],
-    backoffice: ['master'],
-    contabilidad: ['master'],
-    'growth-hacking': ['master'],
+    sorticenter: [],
+    backoffice: [],
+    contabilidad: [],
+    'growth-hacking': [],
   },
 };
 
 function createSystemsForCategory(categoryId: string): System[] {
   const categoryRoles = CATEGORY_SYSTEM_ROLES[categoryId];
+  const categoryFormUrls = FORM_URLS[categoryId];
+
   if (!categoryRoles) {
     return [];
   }
 
-  return BASE_SYSTEMS.map((system) => ({
+  return BASE_SYSTEMS.filter((system) => {
+    const roles = categoryRoles[system.id];
+    return roles && roles.length > 0;
+  }).map((system) => ({
     ...system,
     allowedRoles: categoryRoles[system.id] || [],
+    formUrl: categoryFormUrls?.[system.id] || '',
   }));
 }
 
+//se añaden las categorias y los roles que pueden acceder a cada categoria
 export const CATEGORIES: Category[] = [
   {
     id: 'mejoras-requerimientos',
-    name: 'Mejoras o Requerimientos de Cambio',
+    name: 'Solicitud de Servicios de Innovación y Desarrollo',
     description: 'Solicitudes de mejoras y nuevas funcionalidades',
     icon: 'improvements',
     image: '/assets/img/categories/mejoras.png',
@@ -131,7 +182,7 @@ export const CATEGORIES: Category[] = [
   },
   {
     id: 'solicitud-servicios',
-    name: 'Solicitud de Servicios',
+    name: 'Solicitud de Eventos',
     description: 'Solicitar servicios y asistencia administrativa',
     icon: 'support',
     image: '/assets/img/categories/soporte.png',
