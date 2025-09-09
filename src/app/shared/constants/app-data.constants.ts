@@ -141,11 +141,19 @@ function createSystemsForCategory(categoryId: string): System[] {
   return BASE_SYSTEMS.filter((system) => {
     const roles = categoryRoles[system.id];
     return roles && roles.length > 0;
-  }).map((system) => ({
-    ...system,
-    allowedRoles: categoryRoles[system.id] || [],
-    formUrl: categoryFormUrls?.[system.id] || '',
-  }));
+  }).map((system) => {
+    const systemName =
+      categoryId === 'gestion-riesgos' && system.id === 'sorti-ec'
+        ? 'Jugadores y agentes'
+        : system.name;
+
+    return {
+      ...system,
+      name: systemName,
+      allowedRoles: categoryRoles[system.id] || [],
+      formUrl: categoryFormUrls?.[system.id] || '',
+    };
+  });
 }
 
 //se añaden las categorias y los roles que pueden acceder a cada categoria
