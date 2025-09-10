@@ -144,7 +144,7 @@ function createSystemsForCategory(categoryId: string): System[] {
   }).map((system) => {
     const systemName =
       categoryId === 'gestion-riesgos' && system.id === 'sorti-ec'
-        ? 'Jugadores y agentes'
+        ? 'Jugadores Agentes y Afiliados' 
         : system.name;
 
     return {
