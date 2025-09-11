@@ -20,54 +20,52 @@ docker run -d -p 8080:80 --name container-clickup-forms clickup-forms:prod
 
 ### Gestión de contenedores
 
-```bash
 # Ver contenedores en ejecución
+```bash
 docker ps
 ```
 
 <button onclick="navigator.clipboard.writeText('docker ps')">Copiar comando</button>
 
-```bash
 # Detener el contenedor
+```bash
 docker stop container-clickup-forms
 ```
 
 <button onclick="navigator.clipboard.writeText('docker stop container-clickup-forms')">Copiar comando</button>
 
-```bash
 # Iniciar el contenedor
+```bash
 docker start container-clickup-forms
 ```
 
 <button onclick="navigator.clipboard.writeText('docker start container-clickup-forms')">Copiar comando</button>
 
-```bash
 # Eliminar el contenedor
+```bash
 docker rm container-clickup-forms
 ```
 
 <button onclick="navigator.clipboard.writeText('docker rm container-clickup-forms')">Copiar comando</button>
 
-```bash
 # Eliminar la imagen
+```bash
 docker rmi clickup-forms:prod
 ```
 
 <button onclick="navigator.clipboard.writeText('docker rmi clickup-forms:prod')">Copiar comando</button>
 
-```bash
 # Ver logs del contenedor
+```bash
 docker logs container-clickup-forms
 ```
 
 <button onclick="navigator.clipboard.writeText('docker logs container-clickup-forms')">Copiar comando</button>
 
-```bash
 # Acceder al contenedor
+```bash
 docker exec -it container-clickup-forms /bin/bash
 ```
-
-<button onclick="navigator.clipboard.writeText('docker exec -it container-clickup-forms /bin/bash')">Copiar comando</button>
 
 ### Acceso
 
