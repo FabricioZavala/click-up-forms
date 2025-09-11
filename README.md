@@ -1,6 +1,6 @@
 # ClickUp Forms
 
-## 🚀 Comandos Docker
+## Comandos de Docker
 
 ### Construir imagen de producción
 
