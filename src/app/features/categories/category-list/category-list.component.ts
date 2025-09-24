@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
+import { FooterComponent } from '../../../shared/components/footer/footer.component';
 import { CATEGORIES } from '../../../shared/constants/app-data.constants';
 import { ICONS } from '../../../shared/constants/icons.constants';
 import { Category } from '../../../shared/models/interfaces';
@@ -13,7 +14,7 @@ import { NavigationService } from '../../../core/services/navigation.service';
 @Component({
   selector: 'app-category-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, LoadingSpinnerComponent],
+  imports: [CommonModule, FormsModule, LoadingSpinnerComponent, FooterComponent],
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss'],
 })

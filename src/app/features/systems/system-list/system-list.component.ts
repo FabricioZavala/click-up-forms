@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
 import { FormModalComponent } from '../form-modal/form-modal.component';
+import { FooterComponent } from '../../../shared/components/footer/footer.component';
 import { CATEGORIES } from '../../../shared/constants/app-data.constants';
 import { Category, System } from '../../../shared/models/interfaces';
 import { RoleService } from '../../../core/services/role.service';
@@ -12,7 +13,7 @@ import { NavigationService } from '../../../core/services/navigation.service';
 @Component({
   selector: 'app-system-list',
   standalone: true,
-  imports: [CommonModule, LoadingSpinnerComponent, FormModalComponent],
+  imports: [CommonModule, LoadingSpinnerComponent, FormModalComponent, FooterComponent],
   templateUrl: './system-list.component.html',
   styleUrls: ['./system-list.component.scss'],
 })
