@@ -12,8 +12,10 @@
     "serve:ssr:clickup-forms": "node dist/clickup-forms/server/server.mjs",
     "docker:build": "docker build -t clickup-forms .",
     "docker:run": "docker run -p 8080:80 clickup-forms",
-    "docker:compose:up": "docker-compose up --build",
-    "docker:compose:down": "docker-compose down"
+    "docker:run:detached": "docker run -d -p 8080:80 --name clickup-forms-container clickup-forms",
+    "docker:stop": "docker stop clickup-forms-container",
+    "docker:remove": "docker rm clickup-forms-container",
+    "docker:clean": "docker rmi clickup-forms"
   },
   "prettier": {
     "overrides": [

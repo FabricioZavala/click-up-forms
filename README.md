@@ -1,78 +1,132 @@
-# ClickUp Forms
+# Docker Setup para ClickUp Forms
 
-## Comandos de Docker
+##  Comandos Docker Disponibles
 
-# Actualizar contenedor existente
-
+### Construcción de la Imagen
 ```bash
-docker stop container-clickup-forms
+# Construir la imagen Docker
+npm run docker:build
 
-
-### Construir imagen de producción
-
-```bash
-docker build -t clickup-forms:prod .
+# O directamente con Docker
+docker build -t clickup-forms .
 ```
 
-<button onclick="navigator.clipboard.writeText('docker build -t clickup-forms:prod .')">Copiar comando</button>
-
-### Ejecutar contenedor en puerto 8080
+### Ejecución del Contenedor
 
 ```bash
-docker run -d -p 8080:80 --name container-clickup-forms clickup-forms:prod
+# O directamente con Docker
+docker run -d -p 8080:80 --name clickup-forms-container clickup-forms
 ```
 
-<button onclick="navigator.clipboard.writeText('docker run -d -p 8080:80 --name container-clickup-forms clickup-forms:prod')">Copiar comando</button>
+### Gestión del Contenedor
 
-### Gestión de contenedores
-
-# Ver contenedores en ejecución
 ```bash
-docker ps
-```
-
-<button onclick="navigator.clipboard.writeText('docker ps')">Copiar comando</button>
-
 # Detener el contenedor
-```bash
-docker stop container-clickup-forms
-```
-
-<button onclick="navigator.clipboard.writeText('docker stop container-clickup-forms')">Copiar comando</button>
-
-# Iniciar el contenedor
-```bash
-docker start container-clickup-forms
-```
-
-<button onclick="navigator.clipboard.writeText('docker start container-clickup-forms')">Copiar comando</button>
+npm run docker:stop
 
 # Eliminar el contenedor
-```bash
-docker rm container-clickup-forms
+npm run docker:remove
+
+# Limpiar la imagen
+npm run docker:clean
 ```
 
-<button onclick="navigator.clipboard.writeText('docker rm container-clickup-forms')">Copiar comando</button>
+## 🔧 Configuración
 
-# Eliminar la imagen
-```bash
-docker rmi clickup-forms:prod
+### Puertos
+- **Contenedor**: Puerto 80 (nginx)
+- **Host**: Puerto 8080 (configurable)
+- **Acceso**: http://localhost:8080
+
+### Health Check
+La imagen incluye un health check que verifica cada 30 segundos el endpoint `/health`.
+
+### Variables de Entorno
+- `NODE_ENV=production` (configurado en build time)
+- `TZ=America/Guayaquil` (timezone configurado)
+
+## 📁 Estructura de la Imagen
+
+```
+Stage 1 (Builder): node:20-alpine
+├── Instalar dependencias
+├── Construir aplicación Angular
+└── Generar build de producción
+
+Stage 2 (Production): nginx:1.26-alpine
+├── Copiar build desde stage anterior
+├── Configurar nginx
+├── Setup de seguridad
+└── Health checks
 ```
 
-<button onclick="navigator.clipboard.writeText('docker rmi clickup-forms:prod')">Copiar comando</button>
+## 🔒 Características de Seguridad
 
-# Ver logs del contenedor
+- ✅ Ejecución con usuario no-root (nginx)
+- ✅ Imagen base Alpine (menor superficie de ataque)
+- ✅ Health checks configurados
+- ✅ Headers de seguridad en nginx
+- ✅ Cache optimizado para assets estáticos
+
+## 🛠️ Troubleshooting
+
+### Verificar que el contenedor está funcionando
 ```bash
-docker logs container-clickup-forms
+docker ps
+docker logs clickup-forms-container
 ```
 
-<button onclick="navigator.clipboard.writeText('docker logs container-clickup-forms')">Copiar comando</button>
-
-# Acceder al contenedor
+### Acceder al contenedor para debugging
 ```bash
-docker exec -it container-clickup-forms /bin/bash
+docker exec -it clickup-forms-container sh
 ```
 
-### Acceso
+### Limpiar todo (contenedores, imágenes, volumes)
+```bash
+docker system prune -a
+```
 
-- **URL**: http://localhost:8080
+## 📊 Optimizaciones Implementadas
+
+1. **Multi-stage build**: Reduce el tamaño final de la imagen
+2. **Cache mounting**: Acelera builds subsecuentes
+3. **Layer caching**: Optimiza la reconstrucción
+4. **Compression**: Gzip habilitado en nginx
+5. **Security headers**: Headers de seguridad configurados
+6. **Static assets caching**: Cache de 1 año para assets
+
+## 🌐 Despliegue en Servidor
+
+### Construcción para producción
+```bash
+docker build -t clickup-forms:latest .
+```
+
+### Ejecución en servidor
+```bash
+# Con restart automático
+docker run -d \
+  --name clickup-forms \
+  --restart unless-stopped \
+  -p 80:80 \
+  clickup-forms:latest
+
+# Con logs persistentes
+docker run -d \
+  --name clickup-forms \
+  --restart unless-stopped \
+  -p 80:80 \
+  -v /var/log/clickup-forms:/var/log/nginx \
+  clickup-forms:latest
+```
+
+### Configuración de proxy reverso (Nginx/Apache)
+El contenedor expone el puerto 80, puedes configurar tu servidor web principal como proxy reverso hacia este contenedor.
+
+## 📝 Notas Importantes
+
+- La aplicación está optimizada para SPA (Single Page Application)
+- Todos los routes de Angular son manejados por el `try_files` de nginx
+- Los assets estáticos tienen cache configurado
+- El contenedor incluye timezone configurado para Ecuador
+- Se eliminaron las referencias a docker-compose del package.json
