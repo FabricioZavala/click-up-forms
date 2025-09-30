@@ -2,6 +2,12 @@
 
 ## Comandos de Docker
 
+# Actualizar contenedor existente
+
+```bash
+docker stop container-clickup-forms
+
+
 ### Construir imagen de producción
 
 ```bash
