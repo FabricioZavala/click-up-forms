@@ -27,9 +27,9 @@ COPY package*.json ./
 RUN npm config set fund false && \
     npm config set audit false
 
-# Instalar dependencias con cache mounting para mejor performance
+# Instalar todas las dependencias (necesarias para el build de Angular)
 RUN --mount=type=cache,target=/root/.npm \
-    npm ci --only=production --silent && \
+    npm ci --silent && \
     npm cache clean --force
 
 # Copiar código fuente
