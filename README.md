@@ -4,9 +4,6 @@
 
 ### Construcción de la Imagen
 ```bash
-# Construir la imagen Docker
-npm run docker:build
-
 # O directamente con Docker
 docker build -t clickup-forms .
 ```

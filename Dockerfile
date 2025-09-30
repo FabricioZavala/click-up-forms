@@ -9,10 +9,6 @@ FROM node:20-alpine AS builder
 # Configurar directorio de trabajo
 WORKDIR /app
 
-# Configurar argumentos de construcción
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
-
 # Instalar dependencias del sistema necesarias para Angular
 RUN apk add --no-cache \
     python3 \
@@ -23,20 +19,19 @@ RUN apk add --no-cache \
 # Copiar archivos de configuración de dependencias
 COPY package*.json ./
 
-# Configurar npm para producción
+# Configurar npm
 RUN npm config set fund false && \
     npm config set audit false
 
-# Instalar todas las dependencias (necesarias para el build de Angular)
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --silent && \
-    npm cache clean --force
+
+# Usamos npm install pq el ci da errorrr
+RUN npm install --no-optional
 
 # Copiar código fuente
 COPY . .
 
-# Construir la aplicación para producción
-RUN npm run build:prod
+# Construir la aplicación Angular
+RUN npx ng build --configuration=production
 
 # ========================
 # Stage 2: Production Stage
@@ -58,6 +53,7 @@ RUN rm -rf /usr/share/nginx/html/* && \
     rm /etc/nginx/conf.d/default.conf
 
 # Copiar la aplicación construida desde el stage anterior
+# Angular 20 genera la salida en dist/clickup-forms/browser
 COPY --from=builder /app/dist/clickup-forms/browser /usr/share/nginx/html
 
 # Copiar configuración personalizada de nginx
@@ -70,8 +66,7 @@ RUN mkdir -p /var/log/nginx
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
     chmod -R 755 /usr/share/nginx/html
 
-# Crear usuario no-root para seguridad (nginx ya corre como nginx user)
-USER nginx
+# Nginx automáticamente cambia al usuario nginx después de iniciar
 
 # Exponer puerto 80
 EXPOSE 80
