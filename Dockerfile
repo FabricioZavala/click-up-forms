@@ -19,13 +19,15 @@ RUN apk add --no-cache \
 # Copiar archivos de configuración de dependencias
 COPY package*.json ./
 
-# Configurar npm
+# Configurar npm para mejor rendimiento
 RUN npm config set fund false && \
-    npm config set audit false
+    npm config set audit false && \
+    npm config set loglevel error
 
-
-# Usamos npm install pq el ci da errorrr
-RUN npm install --no-optional
+# Instalar todas las dependencias (necesarias para el build de Angular)
+# Usamos npm ci para instalación limpia y reproducible basada en package-lock.json
+RUN npm ci --silent && \
+    npm cache clean --force
 
 # Copiar código fuente
 COPY . .
